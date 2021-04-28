@@ -35,5 +35,24 @@ def listajuegos():
 			datos.append(dicc)
 	return render_template("listajuegos.html",datos=datos,cad=cad)
 
+@app.route('/juego/<int:identificador>')
+def detalle(identificador):
+	datos = []
+	ind = True
+	for i in juegosmsx:
+		if i.get('id') == identificador:
+			dicc = {}
+			ind = False
+			dicc['nombre'] = i.get('nombre')
+			dicc['desarrollador'] = i.get('desarrollador')
+			dicc['sistema'] = i.get('sistema')
+			dicc['distribuidor'] = i.get('distribuidor')
+			dicc['categoria'] = i.get('categoria')
+			dicc['año'] = i.get('año')
+			datos.append(dicc)
+	if ind:
+		abort(404)
+	return render_template("detallesjuegos.html",datos=datos)
+
 
 app.run(debug=True)
