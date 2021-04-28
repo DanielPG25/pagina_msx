@@ -9,11 +9,11 @@
 					<h1>Buscador de juegos</h1>
 					<p>Introduce a continuación la cadena por la que buscaremos el juego</p>
 					<section>
-						<form method="post" action="/listajuegos">
+						<form action="/listajuegos" method="post">
 							<div class="fields">
 								<div class="field">
 									<label for="message">Nombre de juego</label>
-									<input type="text" name="usuario" value="{{juego}}"/>
+									<input type="text" name="juego" value="{{juego}}"/>
 								</div>
 							</div>
 							<ul class="actions">

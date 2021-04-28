@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 
-with open('./MSX.json') as f:
+with open('MSX.json') as f:
     juegosmsx=json.load(f)
 
 @app.route('/',methods=["GET"])
@@ -18,10 +18,16 @@ def juegos():
 
 @app.route('/listajuegos',methods=["POST"])
 def listajuegos():
-	cad = request.form.get("juego")
+	cad = str(request.form.get("juego"))
 	datos = []
 	for i in juegosmsx:
-		if i.get("nombre").startswith(cad):
+		if cad == "":
+			dicc = {}
+			dicc['id'] = i.get('id')
+			dicc['nombre'] = i.get('nombre')
+			dicc['desarrollador'] = i.get('desarrollador')
+			datos.append(dicc)
+		if str(i.get('nombre')).startswith(cad):
 			dicc = {}
 			dicc['id'] = i.get('id')
 			dicc['nombre'] = i.get('nombre')
