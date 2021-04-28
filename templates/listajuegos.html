@@ -9,8 +9,26 @@
 					{% else %}
 					<h1>Juegos que empiezan por "{{cad}}"</h1>
 					{% endif %}
-					<p>Haz click en la imagen para acceder al buscador de juegos</p>
-					<a href="/juegos" class="image"><img src="{{url_for('static', filename='images/msx_logo.png')}}" alt="" data-position="center center" /></a>
+					<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Nombre</th>
+													<th>Desarrollador</th>
+													<th>Enlace</th>
+												</tr>
+											</thead>
+											<tbody>
+													{% for juego in datos%}
+														<tr>
+															<td>{{juego.nombre}}</td>
+															<td>{{juego.desarrollador}}</td>
+															<td><a href="/juego/{{juego.id}}">Detalles</a></td>
+														</tr>
+													{% endfor %}									
+											</tbody>
+										</table>
+									</div>
 				</div>
 			</section>			
 	</div>
