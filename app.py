@@ -55,4 +55,5 @@ def detalle(identificador):
 	return render_template("detallesjuegos.html",datos=datos)
 
 
-app.run(debug=True)
+port=os.environ["PORT"]
+app.run('0.0.0.0',int(port), debug=True)
