@@ -27,7 +27,7 @@ def listajuegos():
 			dicc['nombre'] = i.get('nombre')
 			dicc['desarrollador'] = i.get('desarrollador')
 			datos.append(dicc)
-		if str(i.get('nombre')).startswith(cad):
+		elif str(i.get('nombre')).startswith(cad):
 			dicc = {}
 			dicc['id'] = i.get('id')
 			dicc['nombre'] = i.get('nombre')
