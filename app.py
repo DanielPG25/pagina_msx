@@ -36,19 +36,25 @@ def juegos():
 		indicad = True
 		for i in juegosmsx:
 			if cad == "":
-				dicc = {}
-				dicc['id'] = i.get('id')
-				dicc['nombre'] = i.get('nombre')
-				dicc['desarrollador'] = i.get('desarrollador')
-				datos.append(dicc)
-				indicad = False
+				for n in catval:
+					if n.get('valor') == seleccionado:
+						if i.get('categoria') == n.get('texto'):
+							dicc = {}
+							dicc['id'] = i.get('id')
+							dicc['nombre'] = i.get('nombre')
+							dicc['desarrollador'] = i.get('desarrollador')
+							datos.append(dicc)
+							indicad = False
 			elif str(i.get('nombre')).startswith(cad):
-				dicc = {}
-				dicc['id'] = i.get('id')
-				dicc['nombre'] = i.get('nombre')
-				dicc['desarrollador'] = i.get('desarrollador')
-				datos.append(dicc)
-				indicad = False
+				for n in catval:
+					if n.get('valor') == seleccionado:
+						if i.get('categoria') == n.get('texto'):
+							dicc = {}
+							dicc['id'] = i.get('id')
+							dicc['nombre'] = i.get('nombre')
+							dicc['desarrollador'] = i.get('desarrollador')
+							datos.append(dicc)
+							indicad = False
 		if indicad:
 			return render_template("juegos.html",cad=cad,error=True,datos=catval,seleccionado=seleccionado)
 		else:	

@@ -9,7 +9,7 @@
 					<h1>Buscador de juegos</h1>
 					<p>Introduce a continuación la cadena por la que buscaremos el juego (la primera letra en mayúscula)</p>
 					{% if error %}
-						<h2>No existen juegos que empiecen por la cadena introducida</h2>
+						<h2>No existen juegos que empiecen por la cadena introducida y que tengan la categoría elegida</h2>
 					{% endif %}	
 					<section>
 						<form action="/juegos" method="post">
