@@ -12,28 +12,34 @@ with open('MSX.json') as f:
 def inicio():
 	return render_template("inicio.html")
 
-@app.route('/juegos',methods=["GET"])
+@app.route('/juegos',methods=["GET","POST"])
 def juegos():
-	return render_template("juegos.html")
-
-@app.route('/listajuegos',methods=["POST"])
-def listajuegos():
-	cad = str(request.form.get("juego"))
-	datos = []
-	for i in juegosmsx:
-		if cad == "":
-			dicc = {}
-			dicc['id'] = i.get('id')
-			dicc['nombre'] = i.get('nombre')
-			dicc['desarrollador'] = i.get('desarrollador')
-			datos.append(dicc)
-		elif str(i.get('nombre')).startswith(cad):
-			dicc = {}
-			dicc['id'] = i.get('id')
-			dicc['nombre'] = i.get('nombre')
-			dicc['desarrollador'] = i.get('desarrollador')
-			datos.append(dicc)
-	return render_template("listajuegos.html",datos=datos,cad=cad)
+	if request.method=="GET":
+		return render_template("juegos.html")
+	else:
+		cad = str(request.form.get("cad"))
+		datos = []
+		indicad = True
+		for i in juegosmsx:
+			if cad == "":
+				dicc = {}
+				dicc['id'] = i.get('id')
+				dicc['nombre'] = i.get('nombre')
+				dicc['desarrollador'] = i.get('desarrollador')
+				datos.append(dicc)
+				indicad = False
+			elif str(i.get('nombre')).startswith(cad):
+				dicc = {}
+				dicc['id'] = i.get('id')
+				dicc['nombre'] = i.get('nombre')
+				dicc['desarrollador'] = i.get('desarrollador')
+				datos.append(dicc)
+				indicad = False
+		if indicad:
+			return render_template("juegos.html",cad=cad,error=True)
+		else:	
+			return render_template("listajuegos.html",datos=datos,cad=cad)
+	
 
 @app.route('/juego/<int:identificador>')
 def detalle(identificador):

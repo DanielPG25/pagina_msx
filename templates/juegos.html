@@ -8,16 +8,19 @@
 				<div class="inner">
 					<h1>Buscador de juegos</h1>
 					<p>Introduce a continuación la cadena por la que buscaremos el juego (la primera letra en mayúscula)</p>
+					{% if error %}
+						<h2>No existen juegos que empiecen por la cadena introducida</h2>
+					{% endif %}	
 					<section>
-						<form action="/listajuegos" method="post">
+						<form action="/juegos" method="post">
 							<div class="fields">
 								<div class="field">
 									<label for="message">Nombre de juego</label>
-									<input type="text" name="juego" value="{{juego}}"/>
+									<input type="text" name="cad" value="{{cad}}"/>
 								</div>
 							</div>
 							<ul class="actions">
-								<li><a href="/listajuegos" class="button submit">Buscar</a></li>
+								<li><a href="/juegos" class="button submit">Buscar</a></li>
 							</ul>
 						</form>
 					</section>
