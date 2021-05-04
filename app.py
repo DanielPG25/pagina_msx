@@ -14,10 +14,24 @@ def inicio():
 
 @app.route('/juegos',methods=["GET","POST"])
 def juegos():
+	categoria = []
+	for a in juegosmsx:
+		categoria.append(a.get('categoria'))
+	categorias = set(categoria)
+	catval = []
+	recorrido = 1
+	for b in categorias:
+		dicci={}
+		dicci['valor'] = recorrido
+		dicci['texto'] = b
+		recorrido = recorrido + 1
+		catval.append(dicci)
+
 	if request.method=="GET":
-		return render_template("juegos.html")
+		return render_template("juegos.html",datos=catval)
 	else:
 		cad = str(request.form.get("cad"))
+		seleccionado = int(request.form.get("categoria_seleccionada"))
 		datos = []
 		indicad = True
 		for i in juegosmsx:
@@ -36,7 +50,7 @@ def juegos():
 				datos.append(dicc)
 				indicad = False
 		if indicad:
-			return render_template("juegos.html",cad=cad,error=True)
+			return render_template("juegos.html",cad=cad,error=True,datos=catval,seleccionado=seleccionado)
 		else:	
 			return render_template("listajuegos.html",datos=datos,cad=cad)
 	
